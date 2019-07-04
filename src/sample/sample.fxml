@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import sample.NumberField?>
+
+<StackPane alignment="center" prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+    <VBox alignment="CENTER" prefHeight="885.0" prefWidth="1656.0" spacing="30.0">
+        <HBox alignment="CENTER" spacing="20">
+            <Label fx:id="firstnameLabel" />
+            <TextField fx:id="firstnameField" prefHeight="30" prefWidth="150" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="20">
+            <Label fx:id="lastnameLabel" />
+            <TextField fx:id="lastnameField" prefHeight="30" prefWidth="150" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="20">
+            <Label fx:id="ageLabel" />
+            <NumberField fx:id="ageField" prefHeight="30" prefWidth="150" />
+        </HBox>
+        <HBox alignment="CENTER" spacing="100.0">
+            <Button fx:id="saveButton" onAction="#save" prefHeight="30" prefWidth="60" />
+            <Button fx:id="loadButton" onAction="#load" prefHeight="30" prefWidth="60" />
+        </HBox>
+    </VBox>
+    <VBox alignment="BOTTOM_LEFT" maxHeight="40.0" maxWidth="40.0" StackPane.alignment="BOTTOM_LEFT">
+        <Button fx:id="languageButton" onAction="#switchLanguage" prefHeight="40" prefWidth="40" />
+    </VBox>
+</StackPane>
