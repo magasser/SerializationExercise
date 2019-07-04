@@ -42,36 +42,23 @@ public class Controller implements Initializable, PropertyChangeListener {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.resourceBundle = resourceBundle;
         this.person = new Person();
+        this.person.addPropertyChangeListener(this);
         setLanguageTexts();
         this.languageButton.setText("EN");
 
         this.firstnameField.textProperty().addListener((observable, oldValue, newValue) -> this.person.setFirstname(newValue));
-        this.firstnameField.textProperty().addListener((observable, oldValue, newValue) -> this.person.setLastname(newValue));
-        this.firstnameField.textProperty().addListener((observable, oldValue, newValue) -> this.person.setAge(Integer.valueOf(newValue)));
+        this.lastnameField.textProperty().addListener((observable, oldValue, newValue) -> this.person.setLastname(newValue));
+        this.ageField.textProperty().addListener((observable, oldValue, newValue) -> this.person.setAge(Integer.valueOf(newValue)));
     }
 
     @FXML
     private void save() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Person.data"))){
-            oos.writeObject(this.person);
-        } catch(IOException e){
-            e.printStackTrace();
-        }
+        this.person.save();
     }
 
     @FXML
     private void load() {
-        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Person.data"))) {
-            Person person = (Person) ois.readObject();
-
-            this.person.setFirstname(person.getFirstname());
-            this.person.setLastname(person.getLastname());
-            this.person.setAge(person.getAge());
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.person.load();
     }
 
     @FXML

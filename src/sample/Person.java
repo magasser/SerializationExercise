@@ -2,7 +2,7 @@ package sample;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
-import java.io.Serializable;
+import java.io.*;
 
 public class Person implements Serializable {
 
@@ -50,5 +50,27 @@ public class Person implements Serializable {
 
     public void addPropertyChangeListener(PropertyChangeListener pcl){
         this.support.addPropertyChangeListener(pcl);
+    }
+
+    public void load() {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("Person.data"))) {
+            Person person = (Person) ois.readObject();
+
+            setFirstname(person.getFirstname());
+            setLastname(person.getLastname());
+            setAge(person.getAge());
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void save() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("Person.data"))){
+            oos.writeObject(this);
+        } catch(IOException e){
+            e.printStackTrace();
+        }
     }
 }
